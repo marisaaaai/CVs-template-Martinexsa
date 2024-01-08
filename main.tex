@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+    
+\urlstyle{same}
+\usepackage[left=1.5in,top=3.5cm,right=3cm,bottom=4cm,headheight=3.8cm]{geometry}
+\pagestyle{fancy}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tikzpagenodes}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\input{datos}
+\fancyfoot[C]{\begin{tikzpicture}[remember picture,overlay]
+\draw  let \p1=($(current page footer area.north)-(current page.south)$),
+      \n1={veclen(\x1,\y1)} in
+node [inner sep=0,outer sep=0,above right] 
+      at (current page.south west){\includegraphics[width=\paperwidth,height=3.7cm]{footer.png}};
+\end{tikzpicture}}
+
+\fancyhead[CO]{\begin{tikzpicture}[remember picture,overlay]
+\draw  let \p1=($(current page.north)-(current page header area.south)$),
+      \n1={veclen(\x1,\y1)} in
+node [inner sep=0,outer sep=0,below right] 
+      at (current page.north west){\includegraphics[width=\paperwidth,height=2.7cm]{header.png}};
+\end{tikzpicture}}
+
+\begin{document}
+\begin{center}
+    \MakeUppercase{\Large{\textbf{\nombre}}}
+\end{center}
+\vspace{1cm}
+
+\input{capitulos}
+\ifdefined\CAPpersonal
+    \RaggedRight{\large{\textbf{\underline{Datos Personales}}}}
+    \vspace{0.5cm}
+    
+    \input{datosPersonales}
+\fi
+
+\ifdefined\CAPescolaridad
+    \RaggedRight{\large{\textbf{\underline{Escolaridad}}}}
+    \vspace{0.5cm}
+    \input{Escolaridad}
+\fi
+
+\ifdefined\CAPexperiencialaboral
+    \RaggedRight{\large{\textbf{\underline{Experiencia Laboral}}}}
+    \vspace{0.5cm}
+    
+        \input{Experiencia}
+\fi
+
+\ifdefined\CAPperfil
+    \RaggedRight{\large{\textbf{\underline{Experiencia Profesional}}}}
+    %\vspace{0.5cm}
+    
+    \input{parrafoPerfil}
+    \vspace{0.8cm}
+\fi
+
+%\newpage
+\ifdefined\CAPproyectos
+    \RaggedRight{\large{\textbf{\underline{Proyectos Analíticos}}}}
+    \vspace{0.5cm}
+
+    \input{proyectos}
+\fi
+
+\ifdefined\CAPcertificaciones
+    \RaggedRight{\large{\textbf{\underline{Certificaciones}}}}
+    \vspace{0.5cm}
+
+    \input{certificaciones}
+\fi
+
+
+\end{document}
